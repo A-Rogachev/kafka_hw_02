@@ -1,6 +1,6 @@
 import faust
 
-from .core.const import DEFAULT_BANNED_WORDS
+from .core.const import DAY_SECONDS, DEFAULT_BANNED_WORDS
 from .core.types import AppTables
 
 
@@ -30,5 +30,8 @@ def create_tables(faust_app: faust.App) -> AppTables:
             default=list,
             help="Фильтрованные сообщения",
             partitions=3,
+        ).tumbling(
+            size=DAY_SECONDS,
+            expires=DAY_SECONDS,
         ),
     )

@@ -67,7 +67,7 @@ curl -X POST http://localhost:6066/messages/ \
   }'
 ```
 
-**GET /messages/?user_id={id}** - Получение сообщений пользователя
+**GET /messages/?user_id={id}** - Получение сообщений пользователя в пределах суток
 ```bash
 # Получить последние 50 сообщений (по умолчанию)
 curl "http://localhost:6066/messages/?user_id=2"

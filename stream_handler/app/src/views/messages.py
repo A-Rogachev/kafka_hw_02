@@ -44,7 +44,7 @@ def messages_view(app: faust.App, dependencies: AppDependencies) -> None:
                     sender_id=str(serializer.sender_id),
                     recipient_id=str(serializer.recipient_id),
                     text=serializer.text,
-                    timestamp=dt.datetime.now(dt.timezone.utc).isoformat(),
+                    timestamp=dt.datetime.now(dt.timezone.utc).timestamp(),
                 ),
             )
             dependencies.logger.info(
@@ -73,7 +73,7 @@ def messages_view(app: faust.App, dependencies: AppDependencies) -> None:
                         msg
                         for msg in dependencies.tables.messages_filtered.get(
                             user_id, []
-                        )[offset : offset + limit]
+                        ).now()[offset : offset + limit]
                     ],
                 },
                 status=HTTPStatus.OK,
